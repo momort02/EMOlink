@@ -14,7 +14,7 @@ const emotionsDB = {
     "épanouissement", "extase", "jubilation", "félicité", "béatitude", "ravissement", "allégresse", "euphorie",
     "grisé", "transporté", "triomphal", "exultation", "joie de vivre", "plénitude", "satisfaction profonde",
     "contentement", "bonheur intense", "émerveillement", "enthousiasme débordant", "positivité", "optimisme",
-    "grande joie", "bonheur éclatant", "extatique", "rayonnement", "jubiler", "sourire radieux", "bonheur pur"
+    "grande joie", "bonheur éclatant", "extatique", "rayonnement", "jubiler", "sourire radieux", "bonheur pur","rigoler"
   ],
   tristesse: [
     "triste", "malheureux", "déprimé", "désespéré", "morose", "abattu", "solitaire", "fatigué", "lassé",
@@ -189,7 +189,6 @@ window.onload = () => {
   updateHistoryList();
   updateChart();
 };
-
 function openMenu() {
   document.getElementById("sideMenu").style.width = "250px";
 }
@@ -197,7 +196,6 @@ function openMenu() {
 function closeMenu() {
   document.getElementById("sideMenu").style.width = "0";
 }
-
 function exportPDF() {
   const jsPDF = window.jspdf.jsPDF;
   const doc = new jsPDF();
@@ -207,14 +205,6 @@ function exportPDF() {
   doc.setFontSize(12);
   doc.text("Journal Émotionnel - EMOlink", 10, y);
   y += 10;
-
-  // Ajouter le graphique
-  const chartCanvas = document.getElementById("emotionChart");
-  if (chartCanvas) {
-    const chartImg = chartCanvas.toDataURL("image/png", 1.0);
-    doc.addImage(chartImg, "PNG", 10, y, 100, 100); // x, y, width, height
-    y += 110;
-  }
 
   history.forEach((entry) => {
     if (y > 280) {
