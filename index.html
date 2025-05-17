@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
 </head>
 <body>
   <div id="sideMenu" class="side-menu">
@@ -14,8 +15,6 @@
   <a href="index.html">Accueil</a>
   <a href="aide.html">Aide</a>
   <a href="informations.html">Informations</a>
-  <button onclick="loginWithGoogle()">Se connecter avec Google</button>
-
   <!-- D'autres pages à venir -->
 </div>
 <span class="menu-icon" onclick="openMenu()">&#9776;</span>
@@ -41,6 +40,11 @@
   <button onclick="shareMood()">Partager mon humeur</button>
   <h3>Humeurs de mes amis</h3>
   <ul id="friendsMoods"></ul>
+</div>
+<div id="auth-block">
+  <button id="login-google">Connexion avec Google</button>
+  <button id="logout" style="display:none;">Déconnexion</button>
+  <div id="user-info"></div>
 </div>
 </div>
   <script src="script.js"></script>
