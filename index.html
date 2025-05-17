@@ -6,8 +6,6 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <!-- Supabase JS CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
 </head>
 <body>
   <div id="sideMenu" class="side-menu">
@@ -26,27 +24,16 @@
     <div id="result" class="result neutre">Aucune émotion détectée pour l’instant.</div>
     <h2>Journal des émotions</h2>
     <ul id="historyList"></ul>
+    <button onclick="resetJournal()" class="reset-btn" style="margin-top:10px;background:#e74c3c;color:#fff;">Réinitialiser le journal</button>
     <h2>Conseil de EMObot</h2>
     <div id="botAdvice" class="result neutre">Analyse une émotion pour recevoir un conseil.</div>
+    <script src="script.js"></script>
   </div>
   <div class="chart-block">
   <h2>Graphique des émotions</h2>
 <canvas id="emotionChart" width="400" height="200"></canvas>
 <button onclick="exportPDF()">Exporter le journal en PDF</button>
 </div>
-<div class="friends-block">
-  <h2>Partage ton humeur du jour</h2>
-  <input id="friendName" placeholder="Ton prénom ou pseudo">
-  <button onclick="shareMood()">Partager mon humeur</button>
-  <h3>Humeurs de mes amis</h3>
-  <ul id="friendsMoods"></ul>
 </div>
-<div id="auth-block">
-  <button id="login-google">Connexion avec Google</button>
-  <button id="logout" style="display:none;">Déconnexion</button>
-  <div id="user-info"></div>
-</div>
-</div>
-  <script src="script.js"></script>
 </body>
 </html>
