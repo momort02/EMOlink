@@ -328,3 +328,32 @@ window.onload = () => {
   updateChart();
   updateFriendsMoods(); // Ajout ici
 };
+
+// Initialise Supabase
+const supabase = supabase.createClient(
+  'https://TON_PROJET.supabase.co',
+  'TON_ANON_KEY'
+);
+
+// Connexion avec Google
+async function loginWithGoogle() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+  });
+  if (error) console.error('Erreur connexion :', error);
+}
+
+// Récupérer l’utilisateur connecté
+supabase.auth.getUser().then(({ data: { user } }) => {
+  if (user) {
+    console.log('Utilisateur connecté :', user);
+
+    // Optionnel : ajouter l'utilisateur à la table "users"
+    supabase.from("users").insert({
+      id: user.id,
+      email: user.email,
+      nom: user.user_metadata.name,
+      photo: user.user_metadata.avatar_url
+    });
+  }
+});
