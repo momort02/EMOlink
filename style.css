@@ -1,0 +1,179 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #1e1e2f;
+  color: #fff;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: #2a2a3d;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 1s ease-in-out;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #ffd369;
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  resize: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: #ffd369;
+  border: none;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #1e1e2f;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  background: #ffb347;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  text-align: center;
+  animation: slideIn 0.5s ease-in-out;
+}
+.joie { background-color: #3fc380; }
+.tristesse { background-color: #546de5; }
+.colere { background-color: #e74c3c; }
+.peur { background-color: #f39c12; }
+.surprise { background-color: #9b59b6; }
+.neutre { background-color: #95a5a6; }
+
+ul {
+  margin-top: 15px;
+  list-style: none;
+  padding: 0;
+}
+li {
+  padding: 8px;
+  border-bottom: 1px solid #444;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+#emotionChart {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+}
+/* Menu latéral */
+.side-menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+}
+
+.side-menu a {
+  padding: 12px 24px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #f1f1f1;
+  display: block;
+  transition: 0.2s;
+}
+
+.side-menu a:hover {
+  background-color: #575757;
+}
+
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  color: #333;
+}
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  font-size: 36px;
+}
+.links {
+  text-decoration: none;
+  color: inherit;
+  color: #796f6f;
+  font-size: 27px;
+  /* Taille de l'icône Font Awesome */
+  margin-right: 16px;
+  display: inline-block;
+
+}
+
+.main-flex {
+  display: block;
+}
+.chart-block {
+  margin-top: 32px;
+}
+@media (min-width: 900px) {
+  .main-flex {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    justify-content: center;
+  }
+  .container {
+    margin: 0;
+    max-width: 600px;
+    flex: 1 1 0;
+  }
+  .chart-block {
+    flex: 0 0 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 420px;
+    max-width: 420px;
+    margin-top: 0;
+  }
+  #emotionChart {
+    width: 400px !important;
+    height: 400px !important;
+    aspect-ratio: 1/1;
+    margin-bottom: 16px;
+    display: block;
+  }
+}

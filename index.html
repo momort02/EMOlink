@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>EMOlink Web</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div id="sideMenu" class="side-menu">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+  <a href="index.html">Accueil</a>
+  <a href="aide.html">Aide</a>
+  <a href="informations.html">Informations</a>
+  <!-- D'autres pages à venir -->
+</div>
+<span class="menu-icon" onclick="openMenu()">&#9776;</span>
+<div class="main-flex">
+  <div class="container">
+    <h1>EMOlink Web</h1>
+    <textarea id="inputText" placeholder="Écris ton texte ici..."></textarea>
+    <button onclick="detectEmotion()">Analyser</button>
+    <div id="result" class="result neutre">Aucune émotion détectée pour l’instant.</div>
+    <h2>Journal des émotions</h2>
+    <ul id="historyList"></ul>
+    <h2>Conseil de EMObot</h2>
+    <div id="botAdvice" class="result neutre">Analyse une émotion pour recevoir un conseil.</div>
+  </div>
+  <div class="chart-block">
+  <h2>Graphique des émotions</h2>
+<canvas id="emotionChart" width="400" height="200"></canvas>
+<button onclick="exportPDF()">Exporter le journal en PDF</button>
+</div>
+<div class="friends-block">
+  <h2>Partage ton humeur du jour</h2>
+  <input id="friendName" placeholder="Ton prénom ou pseudo">
+  <button onclick="shareMood()">Partager mon humeur</button>
+  <h3>Humeurs de mes amis</h3>
+  <ul id="friendsMoods"></ul>
+</div>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
