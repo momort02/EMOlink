@@ -141,6 +141,39 @@ let emotionCounts = {
 
 let chart;
 
+// Remplace par tes propres clés Supabase
+const SUPABASE_URL = 'https://bhvkgarunjtszetfryow.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJodmtnYXJ1bmp0c3pldGZyeW93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0NzUxNDQsImV4cCI6MjA2MzA1MTE0NH0.yZiahNpUrcEy_3ejWdo2jwezo1NSGCDBlGfyp-TWYEY';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Auth Google
+document.getElementById('login-google').onclick = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+  if (error) alert(error.message);
+};
+
+document.getElementById('logout').onclick = async () => {
+  await supabase.auth.signOut();
+  location.reload();
+};
+
+// Affiche l'utilisateur connecté
+async function checkUser() {
+  const { data: { user } } = await supabase.auth.getUser();
+  const info = document.getElementById('user-info');
+  if (user) {
+    document.getElementById('login-google').style.display = 'none';
+    document.getElementById('logout').style.display = '';
+    info.textContent = `Connecté en tant que ${user.email}`;
+  } else {
+    document.getElementById('login-google').style.display = '';
+    document.getElementById('logout').style.display = 'none';
+    info.textContent = '';
+  }
+}
+checkUser();
+supabase.auth.onAuthStateChange(checkUser);
+
 function detectEmotion() {
   const text = document.getElementById("inputText").value.toLowerCase();
   const resultDiv = document.getElementById("result");
@@ -295,30 +328,33 @@ function getMainMoodOfDay() {
   return "neutre";
 }
 
-function shareMood() {
-  const name = document.getElementById("friendName").value.trim();
-  if (!name) return alert("Entre ton prénom ou pseudo !");
+async function shareMood() {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return alert("Connecte-toi avec Google !");
+  const name = document.getElementById("friendName").value.trim() || user.email;
   const mood = getMainMoodOfDay();
-  let friends = JSON.parse(localStorage.getItem("friendsMoods") || "[]");
-  // Remplace si déjà partagé aujourd'hui
-  const today = new Date().toLocaleDateString();
-  friends = friends.filter(f => !(f.name === name && f.date === today));
-  friends.unshift({ name, mood, date: today });
-  localStorage.setItem("friendsMoods", JSON.stringify(friends));
+  const today = new Date().toISOString().slice(0, 10);
+  await supabase.from('moods').upsert([
+    { user_id: user.id, name, mood, date: today }
+  ]);
   updateFriendsMoods();
 }
 
-function updateFriendsMoods() {
+async function updateFriendsMoods() {
+  const today = new Date().toISOString().slice(0, 10);
+  const { data, error } = await supabase
+    .from('moods')
+    .select('*')
+    .eq('date', today);
   const ul = document.getElementById("friendsMoods");
-  let friends = JSON.parse(localStorage.getItem("friendsMoods") || "[]");
   ul.innerHTML = "";
-  friends
-    .filter(f => f.date === new Date().toLocaleDateString())
-    .forEach(f => {
+  if (data) {
+    data.forEach(f => {
       const li = document.createElement("li");
       li.textContent = `${f.name} : ${f.mood}`;
       ul.appendChild(li);
     });
+  }
 }
 
 // Appelle cette fonction au chargement
@@ -326,34 +362,5 @@ window.onload = () => {
   initCounts();
   updateHistoryList();
   updateChart();
-  updateFriendsMoods(); // Ajout ici
+  updateFriendsMoods();
 };
-
-// Initialise Supabase
-const supabase = supabase.createClient(
-  'https://TON_PROJET.supabase.co',
-  'TON_ANON_KEY'
-);
-
-// Connexion avec Google
-async function loginWithGoogle() {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-  });
-  if (error) console.error('Erreur connexion :', error);
-}
-
-// Récupérer l’utilisateur connecté
-supabase.auth.getUser().then(({ data: { user } }) => {
-  if (user) {
-    console.log('Utilisateur connecté :', user);
-
-    // Optionnel : ajouter l'utilisateur à la table "users"
-    supabase.from("users").insert({
-      id: user.id,
-      email: user.email,
-      nom: user.user_metadata.name,
-      photo: user.user_metadata.avatar_url
-    });
-  }
-});
