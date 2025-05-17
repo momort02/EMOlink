@@ -14,24 +14,7 @@ const emotionsDB = {
     "épanouissement", "extase", "jubilation", "félicité", "béatitude", "ravissement", "allégresse", "euphorie",
     "grisé", "transporté", "triomphal", "exultation", "joie de vivre", "plénitude", "satisfaction profonde",
     "contentement", "bonheur intense", "émerveillement", "enthousiasme débordant", "positivité", "optimisme",
-    "grande joie", "bonheur éclatant", "extatique", "rayonnement", "jubiler", "sourire radieux", "bonheur pur",
-    "rire", "fête", "célébration", "applaudir", "accompli", "admiratif", "affectueux", "aimé", "amical",
-    "apprécié", "assuré", "attentif", "audacieux", "aventureux", "bienveillant", "brillant", "captivé",
-    "charmé", "choyé", "comique", "complice", "consolé", "convivial", "courageux", "créatif", "curieux",
-    "débordant", "démonstratif", "dévoué", "divertissant", "drôle", "éclairé", "éclatant", "éduqué",
-    "élevé", "énergique", "engagé", "enjoué", "enrichi", "enthousiasmant", "épanoui", "épaté", "épris",
-    "espiègle", "étonné", "éveillé", "exaltant", "exaucé", "exclusif", "exemplaire", "exquis", "fasciné",
-    "fidèle", "flatteur", "flottant", "formidable", "fraternel", "fringant", "galant", "gagnant", "généreux",
-    "gentil", "glorieux", "gourmand", "grandiose", "héroïque", "hilarant", "honoré", "humoristique",
-    "impressionné", "indépendant", "inspirant", "intègre", "intelligent", "intense", "intime", "inventif",
-    "irrésistible", "jovial", "juste", "libre", "lumineux", "magnifique", "malicieux", "marquant", "merveilleux",
-    "mignon", "motivant", "naturel", "novateur", "offert", "optimiste", "original", "ouvert", "palpitant",
-    "parfait", "passionné", "pétillant", "plaisant", "plein", "populaire", "positif", "précieux", "privilégié",
-    "proche", "prospère", "radieux", "raffiné", "rassurant", "rayonnant", "réalisé", "réconfortant", "réjouissant",
-    "remarquable", "rempli", "réussi", "riche", "rigolo", "rire", "romantique", "satisfait", "sécurisé",
-    "serein", "sociable", "solide", "souriant", "spirituel", "stable", "stimulant", "subtil", "surpris",
-    "sympathique", "talentueux", "tendre", "tonique", "tranquille", "triomphant", "unique", "valorisé",
-    "vibrant", "victorieux", "vivant", "volontaire", "zélé"
+    "grande joie", "bonheur éclatant", "extatique", "rayonnement", "jubiler", "sourire radieux", "bonheur pur"
   ],
   tristesse: [
     "triste", "malheureux", "déprimé", "désespéré", "morose", "abattu", "solitaire", "fatigué", "lassé",
@@ -44,20 +27,7 @@ const emotionsDB = {
     "baisse de moral", "moral à plat", "désolation", "désarroi", "désespoir", "affliction", "amertume",
     "détresse émotionnelle", "solitude", "désolation intérieure", "chagrin profond", "larmes silencieuses",
     "vide émotionnel", "désillusion", "perte", "souffrance", "peine", "désespoir total", "cœur lourd",
-    "désenchantement", "mélancolie profonde", "désolation totale", "tristesse infinie", "désespoir absolu",
-    "accablé", "affaibli", "agacé", "agonie", "alourdi", "amer", "angoisse", "anéanti", "apathique", "attristé",
-    "attristement", "avachi", "blessé", "bouleversé", "brisé", "chagriné", "chancelant", "choc", "condamné",
-    "confus", "contrarié", "coupable", "crise", "cruel", "découragé", "défait", "délaissé", "démoralisé",
-    "dénigré", "désabusé", "désarmé", "désespéré", "désillusionné", "désintéressé", "désolé", "dévalorisé",
-    "difficile", "douloureux", "dramatique", "effondré", "égaré", "embarrassé", "ému", "épuisé", "esseulé",
-    "exclu", "faible", "fâché", "froid", "frustré", "gêné", "honte", "humilié", "impuissant", "incertain",
-    "incompris", "indifférent", "inquiet", "insatisfait", "isolé", "lassé", "lâché", "lourd", "mal", "malchanceux",
-    "malheureux", "malmené", "manque", "manqué", "mécontent", "méprisé", "minable", "misérable", "morne",
-    "navré", "négligé", "négatif", "nostalgique", "oublie", "outré", "paniqué", "pénible", "perdu", "pessimiste",
-    "plaintif", "pleurs", "préoccupé", "privé", "problème", "rabaissé", "rejeté", "remords", "renfermé",
-    "repoussé", "résigné", "ressentiment", "retiré", "ruiné", "sacrifié", "sceptique", "seul", "sombre",
-    "souffrant", "stressé", "submergé", "surmené", "terne", "trahi", "triste", "troublé", "usé", "vide",
-    "vulnérable"
+    "désenchantement", "mélancolie profonde", "désolation totale", "tristesse infinie", "désespoir absolu"
   ],
   colere: [
     "fâché", "énervé", "furieux", "agacé", "irrité", "frustré", "rage", "exaspéré", "colère", "furibond",
@@ -66,18 +36,7 @@ const emotionsDB = {
     "irrité profondément", "colère noire", "rage intérieure", "fureur", "colère explosive", "colère sourde",
     "colère intense", "colère incontrôlable", "colère froide", "colère brûlante", "colère dévastatrice",
     "colère destructrice", "colère profonde", "colère accumulée", "colère refoulée", "colère latente",
-    "colère éclatante", "colère violente", "colère fulgurante", "colère incontrôlée", "colère incontrôlable",
-    "agressif", "amer", "animosité", "antipathique", "arrogant", "attaquant", "autoritaire", "bagarreur",
-    "belliqueux", "blessant", "boudeur", "brutal", "capricieux", "cassant", "combatif", "condamnant",
-    "conflit", "contrariant", "crispé", "critiquant", "cynique", "dédaigneux", "dégoûté", "dépité",
-    "désagréable", "désapprobateur", "désobligeant", "désolé", "dominateur", "emporté", "énervement",
-    "entêté", "exaspération", "excessif", "fâcherie", "fâcheux", "fier", "frustration", "grinçant",
-    "haine", "hostile", "impatient", "impulsif", "incendiaire", "indigné", "inflexible", "insatisfait",
-    "insolent", "intolérant", "irascible", "irrité", "jaloux", "lourd", "malveillant", "menaçant",
-    "méprisant", "mépris", "moqueur", "négatif", "nerveux", "offensé", "oppressant", "orgueilleux",
-    "outré", "peste", "piquant", "provocateur", "querelleur", "rageur", "râleur", "révolté", "rigide",
-    "rude", "sarcastique", "sévère", "soupçonneux", "stressant", "strict", "suspicieux", "tendu",
-    "têtu", "tyran", "ulcéré", "violent", "vindicatif", "virulent", "vitupérant", "vociférant", "zélé"
+    "colère éclatante", "colère violente", "colère fulgurante", "colère incontrôlée", "colère incontrôlable"
   ],
   peur: [
     "effrayé", "apeuré", "inquiet", "angoissé", "stressé", "nerveux", "paniqué", "terreur", "frayeur",
@@ -85,37 +44,14 @@ const emotionsDB = {
     "inquiétude", "peur intense", "peur profonde", "peur viscérale", "peur incontrôlable", "peur paralysante",
     "peur dévorante", "peur constante", "peur omniprésente", "peur irrationnelle", "peur oppressante",
     "peur écrasante", "peur envahissante", "peur persistante", "peur insurmontable", "peur inexpliquée",
-    "peur incontrôlée", "peur irrésistible", "peur incontrôlée", "peur incontrôlable", "affolé", "alarmé",
-    "angoisse", "anxiété", "appréhendé", "appréhension", "assombri", "attentif", "averti", "blême", "bouleversé",
-    "craintif", "crispé", "déconcerté", "décontenancé", "défensif", "démuni", "dérangé", "désemparé",
-    "désorienté", "déstabilisé", "détecté", "doute", "effaré", "effrayant", "ému", "épouvanté", "esquivé",
-    "étonné", "éveillé", "frappé", "frissonnant", "gêné", "hésitant", "horrifié", "impressionné", "incertain",
-    "inconfortable", "incrédule", "inquiet", "insécurisé", "intimidé", "mal à l’aise", "maladroit", "méfiant",
-    "menaçant", "méprisant", "méfiance", "méfiant", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié",
-    "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié",
-    "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié",
-    "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié",
-    "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié",
-    "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié", "méfié"
+    "peur incontrôlée", "peur incontrôlable", "peur irrésistible", "peur incontrôlée", "peur incontrôlable"
   ],
   surprise: [
     "surpris", "étonné", "choqué", "stupéfait", "impressionné", "émerveillé", "abasourdi", "éberlué",
     "interloqué", "déconcerté", "étonnement", "surprise totale", "surprise agréable", "surprise inattendue",
     "surprise choquante", "surprise bouleversante", "surprise incroyable", "surprise stupéfiante",
     "surprise impressionnante", "surprise déconcertante", "surprise inattendue", "surprise choquante",
-    "surprise bouleversante", "surprise incroyable", "surprise stupéfiante", "surprise impressionnante",
-    "ahuri", "ahurissant", "alarmé", "amusé", "attendri", "attentif", "attrapé", "attrayant", "averti",
-    "bouche bée", "captivé", "charmé", "choquant", "cloué", "coincé", "curieux", "décontenancé", "déconcerté",
-    "dérouté", "désarçonné", "désorienté", "ébloui", "éclatant", "émerveillé", "épaté", "éperdu", "époustouflé",
-    "étonnant", "étonné", "étonnement", "éveillé", "fasciné", "frappé", "frappant", "impressionné", "incroyable",
-    "inédit", "inouï", "interloqué", "intrigué", "invisible", "méconnu", "médusé", "mystérieux", "nouveau",
-    "novateur", "original", "paralysé", "perplexe", "renversant", "renversé", "saisi", "saisissant", "sceptique",
-    "sensationnel", "sidéré", "singulier", "soudain", "spontané", "stupéfait", "stupéfiant", "subit", "surprenant",
-    "surpris", "suspendu", "tétanisé", "troublé", "unique", "éberlué", "éclatant", "épatant", "étonnant",
-    "étonné", "étonnement", "éveillé", "fasciné", "frappé", "impressionné", "incroyable", "inédit", "inouï",
-    "interloqué", "intrigué", "médusé", "mystérieux", "nouveau", "novateur", "original", "paralysé", "perplexe",
-    "renversant", "saisi", "saisissant", "sensationnel", "sidéré", "singulier", "soudain", "spontané", "stupéfait",
-    "stupéfiant", "subit", "surprenant", "surpris", "suspendu", "tétanisé", "troublé", "unique"
+    "surprise bouleversante", "surprise incroyable", "surprise stupéfiante", "surprise impressionnante"
   ]
 };
 
@@ -140,39 +76,6 @@ let emotionCounts = {
 };
 
 let chart;
-
-// Remplace par tes propres clés Supabase
-const SUPABASE_URL = 'https://bhvkgarunjtszetfryow.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJodmtnYXJ1bmp0c3pldGZyeW93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0NzUxNDQsImV4cCI6MjA2MzA1MTE0NH0.yZiahNpUrcEy_3ejWdo2jwezo1NSGCDBlGfyp-TWYEY';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Auth Google
-document.getElementById('login-google').onclick = async () => {
-  const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
-  if (error) alert(error.message);
-};
-
-document.getElementById('logout').onclick = async () => {
-  await supabase.auth.signOut();
-  location.reload();
-};
-
-// Affiche l'utilisateur connecté
-async function checkUser() {
-  const { data: { user } } = await supabase.auth.getUser();
-  const info = document.getElementById('user-info');
-  if (user) {
-    document.getElementById('login-google').style.display = 'none';
-    document.getElementById('logout').style.display = '';
-    info.textContent = `Connecté en tant que ${user.email}`;
-  } else {
-    document.getElementById('login-google').style.display = '';
-    document.getElementById('logout').style.display = 'none';
-    info.textContent = '';
-  }
-}
-checkUser();
-supabase.auth.onAuthStateChange(checkUser);
 
 function detectEmotion() {
   const text = document.getElementById("inputText").value.toLowerCase();
@@ -281,6 +184,12 @@ function initCounts() {
   if (saved) emotionCounts = saved;
 }
 
+window.onload = () => {
+  initCounts();
+  updateHistoryList();
+  updateChart();
+};
+
 function openMenu() {
   document.getElementById("sideMenu").style.width = "250px";
 }
@@ -294,14 +203,18 @@ function exportPDF() {
   const doc = new jsPDF();
   const history = JSON.parse(localStorage.getItem("emoHistory") || "[]");
   let y = 10;
-  const chartCanvas = document.getElementById("emotionChart");
-  const chartImg = chartCanvas.toDataURL("image/png", 1.0);
-  doc.addImage(chartImg, 'PNG', 10, y, 90, 90); // 90x90mm (environ 340x340px)
-  y += 100;
 
   doc.setFontSize(12);
   doc.text("Journal Émotionnel - EMOlink", 10, y);
   y += 10;
+
+  // Ajouter le graphique
+  const chartCanvas = document.getElementById("emotionChart");
+  if (chartCanvas) {
+    const chartImg = chartCanvas.toDataURL("image/png", 1.0);
+    doc.addImage(chartImg, "PNG", 10, y, 100, 100); // x, y, width, height
+    y += 110;
+  }
 
   history.forEach((entry) => {
     if (y > 280) {
@@ -315,52 +228,19 @@ function exportPDF() {
   doc.save("journal_emolink.pdf");
 }
 
-function getMainMoodOfDay() {
-  // Prend la première émotion du dernier texte analysé aujourd'hui
-  const history = JSON.parse(localStorage.getItem("emoHistory") || "[]");
-  const today = new Date().toLocaleDateString();
-  for (let entry of history) {
-    if (entry.startsWith(today)) {
-      const match = entry.match(/\[(.*?)\]/);
-      if (match) return match[1];
-    }
-  }
-  return "neutre";
-}
-
-async function shareMood() {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return alert("Connecte-toi avec Google !");
-  const name = document.getElementById("friendName").value.trim() || user.email;
-  const mood = getMainMoodOfDay();
-  const today = new Date().toISOString().slice(0, 10);
-  await supabase.from('moods').upsert([
-    { user_id: user.id, name, mood, date: today }
-  ]);
-  updateFriendsMoods();
-}
-
-async function updateFriendsMoods() {
-  const today = new Date().toISOString().slice(0, 10);
-  const { data, error } = await supabase
-    .from('moods')
-    .select('*')
-    .eq('date', today);
-  const ul = document.getElementById("friendsMoods");
-  ul.innerHTML = "";
-  if (data) {
-    data.forEach(f => {
-      const li = document.createElement("li");
-      li.textContent = `${f.name} : ${f.mood}`;
-      ul.appendChild(li);
-    });
+function resetJournal() {
+  if (confirm("Voulez-vous vraiment réinitialiser le journal des émotions ?")) {
+    localStorage.removeItem("emoHistory");
+    localStorage.removeItem("emoCounts");
+    emotionCounts = {
+      joie: 0,
+      tristesse: 0,
+      colere: 0,
+      peur: 0,
+      surprise: 0,
+      neutre: 0
+    };
+    updateHistoryList();
+    updateChart();
   }
 }
-
-// Appelle cette fonction au chargement
-window.onload = () => {
-  initCounts();
-  updateHistoryList();
-  updateChart();
-  updateFriendsMoods();
-};
