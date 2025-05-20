@@ -44,7 +44,7 @@ const emotionsDB = {
     "inquiétude", "peur intense", "peur profonde", "peur viscérale", "peur incontrôlable", "peur paralysante",
     "peur dévorante", "peur constante", "peur omniprésente", "peur irrationnelle", "peur oppressante",
     "peur écrasante", "peur envahissante", "peur persistante", "peur insurmontable", "peur inexpliquée",
-    "peur incontrôlée", "peur incontrôlable", "peur irrésistible", "peur incontrôlée", "peur incontrôlable"
+    "peur incontrôlée", "peur incontrôlable", "peur irrésistible", "peur incontrôlée", "peur incontrôlable", "peur"
   ],
   surprise: [
     "surpris", "étonné", "choqué", "stupéfait", "impressionné", "émerveillé", "abasourdi", "éberlué",
