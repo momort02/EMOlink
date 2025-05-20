@@ -36,7 +36,7 @@ const emotionsDB = {
     "irrité profondément", "colère noire", "rage intérieure", "fureur", "colère explosive", "colère sourde",
     "colère intense", "colère incontrôlable", "colère froide", "colère brûlante", "colère dévastatrice",
     "colère destructrice", "colère profonde", "colère accumulée", "colère refoulée", "colère latente",
-    "colère éclatante", "colère violente", "colère fulgurante", "colère incontrôlée", "colère incontrôlable"
+    "colère éclatante", "colère violente", "colère fulgurante", "colère incontrôlée", "colère incontrôlable", "colere"
   ],
   peur: [
     "effrayé", "apeuré", "inquiet", "angoissé", "stressé", "nerveux", "paniqué", "terreur", "frayeur",
