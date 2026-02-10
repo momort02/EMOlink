@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMOlink - Analyse tes émotions</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🧠</span>
+                <h1>EMOlink</h1>
+            </div>
+            <div class="header-buttons">
+                <button id="friendsBtn" class="btn-secondary">
+                    👥 Amis
+                </button>
+                <button id="journalBtn" class="btn-secondary">
+                    📖 Journal
+                </button>
+                <button id="themeToggle" class="btn-icon" aria-label="Changer le thème">
+                    🌙
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Section d'analyse -->
+        <section class="analysis-section">
+            <div class="card">
+                <h2>Comment te sens-tu aujourd'hui ?</h2>
+                <p class="subtitle">Exprime-toi librement, je vais analyser tes émotions</p>
+                
+                <div class="input-container">
+                    <textarea 
+                        id="emotionText" 
+                        placeholder="Écris ici ce que tu ressens, ce qui te préoccupe, tes joies, tes peines..."
+                        maxlength="2000"
+                    ></textarea>
+                    <div class="char-counter">
+                        <span id="charCount">0</span> / 2000 caractères
+                    </div>
+                </div>
+
+                <div class="suggestions" id="suggestions">
+                    <p class="suggestions-title">💡 Suggestions pour enrichir ton texte :</p>
+                    <div class="suggestion-tags">
+                        <span class="tag">Comment tu te sens physiquement ?</span>
+                        <span class="tag">Qu'est-ce qui t'a marqué aujourd'hui ?</span>
+                        <span class="tag">Que ressens-tu en ce moment ?</span>
+                    </div>
+                </div>
+
+                <button id="analyzeBtn" class="btn-primary">
+                    <span class="btn-text">Analyser mes émotions</span>
+                    <span class="btn-icon">✨</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section des résultats -->
+        <section class="results-section" id="resultsSection">
+            <div class="card result-card">
+                <div class="result-header">
+                    <h2>Ton profil émotionnel</h2>
+                    <div class="result-actions">
+                        <button id="shareBtn" class="btn-secondary">👥 Partager</button>
+                        <button id="saveBtn" class="btn-save">💾 Sauvegarder</button>
+                    </div>
+                </div>
+
+                <!-- Émotion dominante -->
+                <div class="dominant-emotion" id="dominantEmotion">
+                    <div class="emotion-icon" id="emotionIcon">😊</div>
+                    <h3 id="emotionName">Joie</h3>
+                    <p class="emotion-message" id="emotionMessage">Tu rayonnes de positivité !</p>
+                    <div class="intensity-badge" id="intensityBadge">Intensité forte</div>
+                </div>
+
+                <!-- Graphique des émotions -->
+                <div class="emotions-chart" id="emotionsChart">
+                    <!-- Les barres seront générées dynamiquement -->
+                </div>
+
+                <!-- Message empathique -->
+                <div class="empathy-message" id="empathyMessage">
+                    <div class="empathy-icon">💭</div>
+                    <p id="empathyText"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section du journal -->
+        <section class="journal-section" id="journalSection">
+            <div class="card journal-card">
+                <div class="journal-header">
+                    <h2>📖 Ton Journal Émotionnel</h2>
+                    <button id="closeJournal" class="btn-close">✕</button>
+                </div>
+
+                <div class="journal-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalEntries">0</span>
+                        <span class="stat-label">Analyses</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="dominantMood">-</span>
+                        <span class="stat-label">Humeur dominante</span>
+                    </div>
+                </div>
+
+                <div class="journal-filters">
+                    <button class="filter-btn active" data-filter="all">Toutes</button>
+                    <button class="filter-btn" data-filter="joie">😊 Joie</button>
+                    <button class="filter-btn" data-filter="tristesse">😢 Tristesse</button>
+                    <button class="filter-btn" data-filter="colère">😠 Colère</button>
+                    <button class="filter-btn" data-filter="stress">😰 Stress</button>
+                </div>
+
+                <div class="journal-entries" id="journalEntries">
+                    <div class="empty-journal">
+                        <span class="empty-icon">📝</span>
+                        <p>Ton journal est vide</p>
+                        <p class="empty-subtitle">Commence par analyser tes émotions !</p>
+                    </div>
+                </div>
+
+                <button id="clearJournal" class="btn-danger">
+                    🗑️ Tout effacer
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>EMOlink - Comprends tes émotions, prends soin de toi 💙</p>
+    </footer>
+
+    <!-- Section Amis -->
+    <section class="friends-section" id="friendsSection">
+        <div class="card friends-card">
+            <div class="friends-header">
+                <h2>👥 Mes Amis</h2>
+                <button id="closeFriends" class="btn-close">✕</button>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="friends-tabs">
+                <button class="tab-btn active" data-tab="my-friends">Mes Amis</button>
+                <button class="tab-btn" data-tab="add-friend">Ajouter</button>
+                <button class="tab-btn" data-tab="requests">
+                    Demandes <span class="badge" id="requestsBadge">0</span>
+                </button>
+                <button class="tab-btn" data-tab="profile">Profil</button>
+            </div>
+
+            <!-- Tab: Mes Amis -->
+            <div class="tab-content active" id="tab-my-friends">
+                <div class="friends-stats-mini">
+                    <div class="stat-mini">
+                        <span class="stat-icon">👥</span>
+                        <span class="stat-value" id="friendsCount">0</span>
+                        <span class="stat-text">amis</span>
+                    </div>
+                    <div class="stat-mini">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value" id="favoritesCount">0</span>
+                        <span class="stat-text">favoris</span>
+                    </div>
+                    <div class="stat-mini">
+                        <span class="stat-icon">💚</span>
+                        <span class="stat-value" id="activeCount">0</span>
+                        <span class="stat-text">actifs</span>
+                    </div>
+                </div>
+
+                <div class="friends-list" id="friendsList">
+                    <!-- Liste dynamique -->
+                </div>
+            </div>
+
+            <!-- Tab: Ajouter un ami -->
+            <div class="tab-content" id="tab-add-friend">
+                <div class="add-friend-container">
+                    <h3>Ajouter un ami</h3>
+                    <p class="subtitle">Entre le code ami de la personne</p>
+                    
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="friendCodeInput" 
+                            placeholder="CODE1234"
+                            maxlength="8"
+                            class="friend-code-input"
+                        />
+                        <button id="sendRequestBtn" class="btn-primary">
+                            Envoyer la demande
+                        </button>
+                    </div>
+
+                    <div class="demo-section">
+                        <p class="demo-text">🎮 Mode démo : Ajouter des amis fictifs</p>
+                        <button id="addDemoFriendsBtn" class="btn-secondary">
+                            Ajouter 5 amis de démo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Demandes d'amis -->
+            <div class="tab-content" id="tab-requests">
+                <h3>Demandes d'amis</h3>
+                <div class="requests-list" id="requestsList">
+                    <div class="empty-state">
+                        <span class="empty-icon">📭</span>
+                        <p>Aucune demande en attente</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Mon Profil -->
+            <div class="tab-content" id="tab-profile">
+                <div class="profile-container">
+                    <h3>Mon Profil</h3>
+                    
+                    <div class="profile-avatar-section">
+                        <div class="profile-avatar-wrapper">
+                            <div class="profile-avatar" id="profileAvatar">😊</div>
+                            <img class="profile-photo" id="profilePhoto" alt="Photo de profil" style="display: none;">
+                            <button class="avatar-edit-btn" id="editAvatarBtn" title="Changer la photo">
+                                📷
+                            </button>
+                        </div>
+                        <input 
+                            type="file" 
+                            id="photoInput" 
+                            accept="image/*" 
+                            style="display: none;"
+                        />
+                        <div class="avatar-options">
+                            <button id="uploadPhotoBtn" class="btn-secondary btn-sm">
+                                📷 Photo de profil
+                            </button>
+                            <button id="changeAvatarBtn" class="btn-secondary btn-sm">
+                                😊 Emoji avatar
+                            </button>
+                            <button id="removePhotoBtn" class="btn-secondary btn-sm" style="display: none;">
+                                🗑️ Supprimer photo
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="usernameInput">Nom d'utilisateur</label>
+                        <input 
+                            type="text" 
+                            id="usernameInput" 
+                            placeholder="Ton pseudo"
+                            maxlength="20"
+                            class="text-input"
+                        />
+                    </div>
+
+                    <div class="friend-code-display">
+                        <label>Ton code ami</label>
+                        <div class="code-box">
+                            <span class="friend-code" id="myFriendCode">--------</span>
+                            <button id="copyCodeBtn" class="btn-icon btn-sm" title="Copier">
+                                📋
+                            </button>
+                        </div>
+                        <p class="help-text">Partage ce code pour que d'autres puissent t'ajouter</p>
+                    </div>
+
+                    <div class="share-preferences">
+                        <h4>Préférences de partage</h4>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="autoShareCheckbox">
+                            <span>Partager automatiquement mes analyses</span>
+                        </label>
+
+                        <div class="input-group">
+                            <label>Niveau de partage par défaut</label>
+                            <select id="shareLevelSelect" class="select-input">
+                                <option value="emotion-only">Émotion uniquement</option>
+                                <option value="summary">Résumé</option>
+                                <option value="full">Texte complet</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="saveProfileBtn" class="btn-primary">
+                        💾 Sauvegarder le profil
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de détails d'un ami -->
+    <div class="modal" id="friendDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="friendDetailName">Nom de l'ami</h3>
+                <button class="btn-close" id="closeFriendDetails">✕</button>
+            </div>
+            <div class="modal-body" id="friendDetailBody">
+                <!-- Contenu dynamique -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de partage -->
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Partager avec des amis</h3>
+                <button class="btn-close" id="closeShareModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="subtitle">Choisis avec qui tu veux partager cette analyse</p>
+                
+                <div class="share-level-selector">
+                    <label>Niveau de partage :</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="shareLevel" value="emotion-only" checked>
+                            <span>😊 Émotion uniquement</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="shareLevel" value="summary">
+                            <span>📝 Résumé</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="shareLevel" value="full">
+                            <span>📖 Texte complet</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="friends-checklist" id="shareWithFriends">
+                    <!-- Liste dynamique de checkboxes -->
+                </div>
+
+                <button id="confirmShareBtn" class="btn-primary">
+                    Partager
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/emotions.js"></script>
+    <script src="js/friends.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/friends-ui.js"></script>
+    <script src="js/firebase-integration.js"></script>
+</body>
+</html>
