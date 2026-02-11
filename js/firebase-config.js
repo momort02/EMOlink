@@ -233,6 +233,14 @@ async function sendFriendRequestFirebase(fromUserId, toFriendCode) {
         const fromProfile = await loadUserProfile(fromUserId);
         const toProfile = await loadUserProfile(toUserId);
 
+        // Vérifier que les profils existent
+        if (!fromProfile || !fromProfile.profile) {
+            return { success: false, message: 'Votre profil n\'existe pas. Veuillez rafraîchir la page.' };
+        }
+        if (!toProfile || !toProfile.profile) {
+            return { success: false, message: 'Le profil de cet utilisateur n\'existe pas.' };
+        }
+
         // Créer la demande
         const requestId = database.ref().push().key;
         const requestData = {
@@ -272,6 +280,14 @@ async function acceptFriendRequestFirebase(userId, requestId) {
         // Charger les profils
         const userProfile = await loadUserProfile(userId);
         const friendProfile = await loadUserProfile(friendId);
+
+        // Vérifier que les profils existent
+        if (!userProfile || !userProfile.profile) {
+            return { success: false, message: 'Votre profil n\'existe pas.' };
+        }
+        if (!friendProfile || !friendProfile.profile) {
+            return { success: false, message: 'Le profil de votre ami n\'existe pas.' };
+        }
 
         // Créer la relation d'amitié (bidirectionnelle)
         const updates = {};
@@ -356,6 +372,11 @@ async function toggleFriendFavoriteFirebase(userId, friendId) {
 async function shareEntryFirebase(userId, entry, friendIds, shareLevel) {
     try {
         const userProfile = await loadUserProfile(userId);
+        
+        // Vérifier que le profil existe
+        if (!userProfile || !userProfile.profile) {
+            return { success: false, message: 'Votre profil n\'existe pas.' };
+        }
         
         // Préparer les données selon le niveau de partage
         let sharedData = {
