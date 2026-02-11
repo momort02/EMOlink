@@ -1,0 +1,39 @@
+{
+  "name": "emolink",
+  "version": "1.0.0",
+  "description": "Application d'analyse émotionnelle intelligente",
+  "author": "EMOlink Team",
+  "license": "MIT",
+  "keywords": [
+    "emotions",
+    "mental-health",
+    "wellness",
+    "journal",
+    "friends"
+  ],
+  "scripts": {
+    "start": "http-server . -p 8080",
+    "android": "npx cap open android",
+    "ios": "npx cap open ios",
+    "sync": "npx cap sync",
+    "build:android": "cd android && ./gradlew assembleDebug",
+    "build:android:release": "cd android && ./gradlew assembleRelease",
+    "build:android:bundle": "cd android && ./gradlew bundleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.5.1",
+    "@capacitor/app": "^5.0.6",
+    "@capacitor/camera": "^5.0.7",
+    "@capacitor/core": "^5.5.1",
+    "@capacitor/geolocation": "^5.0.6",
+    "@capacitor/haptics": "^5.0.6",
+    "@capacitor/keyboard": "^5.0.6",
+    "@capacitor/share": "^5.0.6",
+    "@capacitor/splash-screen": "^5.0.6",
+    "@capacitor/status-bar": "^5.0.6"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^5.5.1",
+    "http-server": "^14.1.1"
+  }
+}
