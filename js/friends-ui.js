@@ -441,11 +441,33 @@ function closeFriendDetailsModal() {
 }
 
 function toggleFavoriteFriend(friendId) {
-    friendsManager.toggleFavorite(friendId);
-    updateFriendsDisplay();
-    updateStats();
-    openFriendDetails(friendId); // Rafraîchir le modal
-    showNotification('Favori mis à jour', 'success');
+    // Utiliser Firebase si disponible, sinon fallback local
+    if (firebaseInitialized && getCurrentUser && getCurrentUser()) {
+        toggleFavoriteFriendWithFirebase(friendId);
+    } else {
+        friendsManager.toggleFavorite(friendId);
+        updateFriendsDisplay();
+        updateStats();
+        openFriendDetails(friendId); // Rafraîchir le modal
+        showNotification('Favori mis à jour', 'success');
+    }
+}
+
+async function toggleFavoriteFriendWithFirebase(friendId) {
+    try {
+        const result = await toggleFriendFavoriteFirebase(getCurrentUser().uid, friendId);
+        if (result.success) {
+            updateFriendsDisplay();
+            updateStats();
+            openFriendDetails(friendId); // Rafraîchir le modal
+            showNotification('Favori mis à jour', 'success');
+        } else {
+            showNotification('Erreur lors du changement', 'error');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        showNotification('Erreur lors du changement', 'error');
+    }
 }
 
 function sendSupportMessage(friendId) {
@@ -470,11 +492,33 @@ function removeFriend(friendId) {
     if (!friend) return;
     
     if (confirm(`Supprimer ${friend.username} de tes amis ?`)) {
-        friendsManager.removeFriend(friendId);
-        updateFriendsDisplay();
-        updateStats();
-        closeFriendDetailsModal();
-        showNotification('Ami supprimé', 'info');
+        // Utiliser Firebase si disponible, sinon fallback local
+        if (firebaseInitialized && getCurrentUser && getCurrentUser()) {
+            removeFriendWithFirebase(friendId);
+        } else {
+            friendsManager.removeFriend(friendId);
+            updateFriendsDisplay();
+            updateStats();
+            closeFriendDetailsModal();
+            showNotification('Ami supprimé', 'info');
+        }
+    }
+}
+
+async function removeFriendWithFirebase(friendId) {
+    try {
+        const result = await removeFriendFirebase(getCurrentUser().uid, friendId);
+        if (result.success) {
+            updateFriendsDisplay();
+            updateStats();
+            closeFriendDetailsModal();
+            showNotification('Ami supprimé', 'info');
+        } else {
+            showNotification('Erreur lors de la suppression', 'error');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        showNotification('Erreur lors de la suppression', 'error');
     }
 }
 
@@ -487,13 +531,34 @@ function sendFriendRequest() {
         return;
     }
     
-    const result = friendsManager.sendFriendRequest(userProfile, code);
-    
-    if (result.success) {
-        showNotification(result.message, 'success');
-        friendsElements.friendCodeInput.value = '';
+    // Utiliser Firebase si disponible, sinon fallback local
+    if (firebaseInitialized && getCurrentUser && getCurrentUser()) {
+        sendFriendRequestWithFirebase(code);
     } else {
-        showNotification(result.message, 'error');
+        const result = friendsManager.sendFriendRequest(userProfile, code);
+        
+        if (result.success) {
+            showNotification(result.message, 'success');
+            friendsElements.friendCodeInput.value = '';
+        } else {
+            showNotification(result.message, 'error');
+        }
+    }
+}
+
+async function sendFriendRequestWithFirebase(code) {
+    try {
+        const result = await sendFriendRequestFirebase(getCurrentUser().uid, code);
+        
+        if (result.success) {
+            showNotification(result.message, 'success');
+            friendsElements.friendCodeInput.value = '';
+        } else {
+            showNotification(result.message, 'error');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        showNotification('Erreur lors de l\'envoi de la demande', 'error');
     }
 }
 
@@ -552,19 +617,61 @@ function updateRequestsDisplay() {
 }
 
 function acceptRequest(requestId) {
-    const result = friendsManager.acceptFriendRequest(requestId, userProfile);
-    if (result.success) {
-        updateFriendsDisplay();
-        updateRequestsDisplay();
-        updateStats();
-        showNotification(result.message, 'success');
+    // Utiliser Firebase si disponible, sinon fallback local
+    if (firebaseInitialized && getCurrentUser && getCurrentUser()) {
+        acceptRequestWithFirebase(requestId);
+    } else {
+        const result = friendsManager.acceptFriendRequest(requestId, userProfile);
+        if (result.success) {
+            updateFriendsDisplay();
+            updateRequestsDisplay();
+            updateStats();
+            showNotification(result.message, 'success');
+        }
+    }
+}
+
+async function acceptRequestWithFirebase(requestId) {
+    try {
+        const result = await acceptFriendRequestFirebase(getCurrentUser().uid, requestId);
+        if (result.success) {
+            updateFriendsDisplay();
+            updateRequestsDisplay();
+            updateStats();
+            showNotification(result.message, 'success');
+        } else {
+            showNotification(result.message, 'error');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        showNotification('Erreur lors de l\'acceptation', 'error');
     }
 }
 
 function rejectRequest(requestId) {
-    friendsManager.rejectFriendRequest(requestId);
-    updateRequestsDisplay();
-    showNotification('Demande refusée', 'info');
+    // Utiliser Firebase si disponible, sinon fallback local
+    if (firebaseInitialized && getCurrentUser && getCurrentUser()) {
+        rejectRequestWithFirebase(requestId);
+    } else {
+        friendsManager.rejectFriendRequest(requestId);
+        updateRequestsDisplay();
+        showNotification('Demande refusée', 'info');
+    }
+}
+
+async function rejectRequestWithFirebase(requestId) {
+    try {
+        const result = await rejectFriendRequestFirebase(getCurrentUser().uid, requestId);
+        if (result.success) {
+            updateRequestsDisplay();
+            showNotification('Demande refusée', 'info');
+        } else {
+            showNotification('Erreur lors du refus', 'error');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        showNotification('Erreur lors du refus', 'error');
+    }
 }
 
 // ===== PARTAGE =====
