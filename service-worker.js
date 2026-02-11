@@ -1,14 +1,16 @@
 const CACHE_NAME = 'emolink-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/emotions.js',
-  '/js/friends.js',
-  '/js/firebase-config.js',
-  '/js/firebase-integration.js',
-  '/js/friends-ui.js',
-  '/js/script.js'
+  'index.html',
+  'manifest.json',
+  'css/style.css',
+  'assets/icon-192.png',
+  'assets/icon-512.png',
+  'js/emotions.js',
+  'js/friends.js',
+  'js/firebase-config.js',
+  'js/firebase-integration.js',
+  'js/friends-ui.js',
+  'js/script.js'
 ];
 
 // Installation
