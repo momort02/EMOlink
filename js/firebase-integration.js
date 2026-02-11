@@ -44,6 +44,7 @@ window.onFirebaseUserSignedIn = async function(user) {
     
     // Charger ou créer le profil
     let profile = await loadUserProfile(user.uid);
+    console.log('📁 Profil chargé:', !!profile, profile);
     
     if (!profile || !profile.profile) {
         // Nouveau compte - créer le profil
@@ -51,6 +52,7 @@ window.onFirebaseUserSignedIn = async function(user) {
         
         // Utiliser le profil local s'il existe
         const localProfile = UserProfile.load();
+        console.log('💾 Profil local disponible:', !!localProfile);
         
         profile = {
             profile: {
@@ -62,7 +64,23 @@ window.onFirebaseUserSignedIn = async function(user) {
             sharePreferences: localProfile.sharePreferences
         };
         
-        await saveUserProfile(user.uid, profile.profile);
+        console.log('📤 Sauvegarde du profil dans Firebase...');
+        const saveResult = await saveUserProfile(user.uid, profile.profile);
+        if (!saveResult) {
+            console.error('⚠️ ERREUR: Impossible de sauvegarder le profil! Les règles Firebase peuvent bloquer l\'accès.');
+            showNotification('⚠️ Impossible de sauvegarder votre profil. Vérifiez les paramètres Firebase.', 'error');
+        } else {
+            console.log('✅ Profil sauvegardé avec succès');
+        }
+    } else {
+        console.log('✅ Profil existant trouvé');
+    }
+    
+    // Vérifier que le profil a la bonne structure avant de le synchronizer
+    if (!profile || !profile.profile || !profile.profile.username) {
+        console.error('❌ CRITIQUE: Structure de profil invalide!', profile);
+        showNotification('❌ Erreur: Structure de profil invalide. Contactez le support.', 'error');
+        return;
     }
     
     // Synchroniser avec le système local

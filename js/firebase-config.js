@@ -215,10 +215,12 @@ async function sendFriendRequestFirebase(fromUserId, toFriendCode) {
         const toUserId = await getUserIdByFriendCode(toFriendCode);
         
         if (!toUserId) {
+            console.error('❌ Code ami introuvable:', toFriendCode);
             return { success: false, message: 'Code ami introuvable' };
         }
 
         if (toUserId === fromUserId) {
+            console.warn('❌ Tentative d\'auto-ajout');
             return { success: false, message: 'Tu ne peux pas t\'ajouter toi-même !' };
         }
 
@@ -226,19 +228,23 @@ async function sendFriendRequestFirebase(fromUserId, toFriendCode) {
         const friendsSnapshot = await DB_REFS.friends(fromUserId).once('value');
         const friends = friendsSnapshot.val() || {};
         if (friends[toUserId]) {
+            console.warn('❌ Déjà ami avec:', toUserId);
             return { success: false, message: 'Déjà ami avec cette personne' };
         }
 
         // Charger les profils
+        console.log('📥 Chargement profils:', fromUserId, toUserId);
         const fromProfile = await loadUserProfile(fromUserId);
         const toProfile = await loadUserProfile(toUserId);
 
         // Vérifier que les profils existent
-        if (!fromProfile || !fromProfile.profile) {
+        if (!fromProfile || !fromProfile.profile || !fromProfile.profile.username) {
+            console.error('❌ Profil expéditeur invalide:', fromProfile);
             return { success: false, message: 'Votre profil n\'existe pas. Veuillez rafraîchir la page.' };
         }
-        if (!toProfile || !toProfile.profile) {
-            return { success: false, message: 'Le profil de cet utilisateur n\'existe pas.' };
+        if (!toProfile || !toProfile.profile || !toProfile.profile.username) {
+            console.error('❌ Profil destinataire introuvable:', toUserId, toProfile);
+            return { success: false, message: 'Le profil de cet utilisateur n\'existe pas ou n\'est pas complètement configuré.' };
         }
 
         // Créer la demande
@@ -254,9 +260,11 @@ async function sendFriendRequestFirebase(fromUserId, toFriendCode) {
             createdAt: firebase.database.ServerValue.TIMESTAMP
         };
 
+        console.log('📤 Envoi demande d\'ami:', requestData);
         // Sauvegarder la demande chez le destinataire
         await database.ref(`users/${toUserId}/friendRequests/${requestId}`).set(requestData);
 
+        console.log('✅ Demande envoyée avec succès');
         return { success: true, message: 'Demande envoyée !' };
     } catch (error) {
         console.error('❌ Erreur lors de l\'envoi de la demande:', error);
@@ -272,20 +280,31 @@ async function acceptFriendRequestFirebase(userId, requestId) {
         const request = requestSnapshot.val();
 
         if (!request) {
+            console.error('❌ Demande introuvable:', requestId);
             return { success: false, message: 'Demande introuvable' };
         }
 
+        if (!request.fromUserId) {
+            console.error('❌ Demande corrompue - pas de fromUserId:', request);
+            return { success: false, message: 'Demande corrompue' };
+        }
+
         const friendId = request.fromUserId;
+        console.log('📥 Acceptation demande de:', friendId);
 
         // Charger les profils
         const userProfile = await loadUserProfile(userId);
         const friendProfile = await loadUserProfile(friendId);
 
-        // Vérifier que les profils existent
-        if (!userProfile || !userProfile.profile) {
-            return { success: false, message: 'Votre profil n\'existe pas.' };
+        console.log('👤 Profils chargés - User:', !!userProfile, 'Friend:', !!friendProfile);
+
+        // Vérifier que les profils existent ET ont la bonne structure
+        if (!userProfile || !userProfile.profile || !userProfile.profile.username) {
+            console.error('❌ Profil utilisateur invalide:', userProfile);
+            return { success: false, message: 'Votre profil n\'existe pas. Veuillez rafraîchir la page.' };
         }
-        if (!friendProfile || !friendProfile.profile) {
+        if (!friendProfile || !friendProfile.profile || !friendProfile.profile.username) {
+            console.error('❌ Profil ami invalide:', friendProfile);
             return { success: false, message: 'Le profil de votre ami n\'existe pas.' };
         }
 
@@ -319,10 +338,12 @@ async function acceptFriendRequestFirebase(userId, requestId) {
 
         await database.ref().update(updates);
 
+        console.log('✅ Amitié créée avec:', friendId);
         return { success: true, message: 'Ami ajouté !' };
     } catch (error) {
         console.error('❌ Erreur lors de l\'acceptation:', error);
-        return { success: false, message: 'Erreur lors de l\'acceptation' };
+        console.error('Stack:', error.stack);
+        return { success: false, message: 'Erreur lors de l\'acceptation: ' + error.message };
     }
 }
 
